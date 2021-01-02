@@ -13,7 +13,7 @@ def index():
 
 @app.route('/logout')
 def logout():
-    session['logged_in']='logout'
+    session['logged_in'] = 'logout'
     session.pop('user')
     return redirect(url_for('index'))
 
@@ -86,15 +86,18 @@ def Login():
 
 @app.route('/updatepost', methods=["POST"])
 def updatepost():
-    obj_vo = postVo()
-    obj_dao = postDao()
-    obj_vo.postitle = request.form.get('postitle')
-    obj_vo.postdescription = request.form.get('postdescription')
-    user = session['user']
-    id = obj_dao.getid(user)
-    obj_vo.userid = id
-    obj_dao.updatepost(obj_vo)
-    return render_template('home.html')
+    if session['logged_in'] == "logged":
+        obj_vo = postVo()
+        obj_dao = postDao()
+        obj_vo.postitle = request.form.get('postitle')
+        obj_vo.postdescription = request.form.get('postdescription')
+        user = session['user']
+        id = obj_dao.getid(user)
+        obj_vo.userid = id
+        obj_dao.updatepost(obj_vo)
+        return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
 
 
 @app.route('/seepost')
@@ -106,21 +109,26 @@ def seepost():
 
 @app.route('/addcomment', methods=["POST"])
 def addcomment():
-    postid = request.form.get('id')
-    obj_vo = commentVo()
-    obj_dao = commentDao()
-    obj_vo.comment = request.form.get('comment')
-    user = session['user']
-    id = obj_dao.getid(user)
-    obj_vo.userid = id
-    obj_vo.postid = postid
-
-    obj_dao.comment(obj_vo)
-    return redirect(url_for('seepost'))
+    if session['logged_in'] == "logged":
+        postid = request.form.get('id')
+        obj_vo = commentVo()
+        obj_dao = commentDao()
+        obj_vo.comment = request.form.get('comment')
+        user = session['user']
+        id = obj_dao.getid(user)
+        obj_vo.userid = id
+        obj_vo.postid = postid
+        obj_dao.comment(obj_vo)
+        return redirect(url_for('seepost'))
+    else:
+        return redirect(url_for('home'))
 
 
 @app.route('/viewcomment')
 def viewcomment():
-    obj_dao = commentDao()
-    result = obj_dao.comments()
-    return render_template('reviews.html', comment=result)
+    if session['logged_in'] == "logged":
+        obj_dao = commentDao()
+        result = obj_dao.comments()
+        return render_template('reviews.html', comment=result)
+    else:
+        return redirect(url_for('home'))
