@@ -1,5 +1,4 @@
 from base import app, render_template, redirect, url_for, request, session, flash
-from werkzeug.utils import secure_filename
 from base.com.dao.operationDao import userDao, postDao, commentDao
 from base.com.vo.uservo import userVo
 from base.com.vo.postvo import postVo
@@ -12,13 +11,9 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/render')
-def home():
-    return render_template('home.html')
-
-
 @app.route('/logout')
 def logout():
+    session.clear()
     return redirect(url_for('index'))
 
 
@@ -27,11 +22,9 @@ def post():
     return render_template('post.html')
 
 
-@app.route('/seepost')
-def seepost():
-    obj_dao = postDao()
-    result = obj_dao.post()
-    return render_template('postdata.html', post=result)
+@app.route('/render')
+def home():
+    return render_template('home.html')
 
 
 @app.route('/comment/<int:id>')
@@ -68,9 +61,19 @@ def Login():
     obj_vo.userpassword = request.form.get('password')
     result = obj_dao.login(obj_vo)
     if result == "valid":
+        session['user'] = request.form.get('email')
         return render_template('home.html')
     elif result == "notvalid":
         data = "Invalid Username and password...!"
+        flash(data)
+        return redirect(url_for('index'))
+    elif result == "password":
+        data = "Invalid password...!"
+        flash(data)
+        return redirect(url_for('index'))
+
+    elif result == "email":
+        data = "Invalid email...!"
         flash(data)
         return redirect(url_for('index'))
 
@@ -81,11 +84,18 @@ def updatepost():
     obj_dao = postDao()
     obj_vo.postitle = request.form.get('postitle')
     obj_vo.postdescription = request.form.get('postdescription')
-    username = request.form.get('username')
-    id = obj_dao.getid(username)
+    user = session['user']
+    id = obj_dao.getid(user)
     obj_vo.userid = id
     obj_dao.updatepost(obj_vo)
     return render_template('home.html')
+
+
+@app.route('/seepost')
+def seepost():
+    obj_dao = postDao()
+    result = obj_dao.post()
+    return render_template('postdata.html', post=result)
 
 
 @app.route('/addcomment', methods=["POST"])
@@ -94,10 +104,11 @@ def addcomment():
     obj_vo = commentVo()
     obj_dao = commentDao()
     obj_vo.comment = request.form.get('comment')
-    username = request.form.get('username')
-    id = obj_dao.getid(username)
+    user = session['user']
+    id = obj_dao.getid(user)
     obj_vo.userid = id
     obj_vo.postid = postid
+
     obj_dao.comment(obj_vo)
     return redirect(url_for('seepost'))
 
