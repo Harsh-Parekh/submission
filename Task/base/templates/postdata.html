@@ -18,10 +18,12 @@
             <td>{{ i[0].username }}</td>
             <td>{{ i[1].postitle }}</td>
             <td>{{ i[1].postdescription }}</td>
-            <td><button><a href="{{ url_for('comment',id=i[1].postid) }}">Review</a></button></td>
+            <td>
+                <button><a href="{{ url_for('comment',id=i[1].postid) }}">Review</a></button>
+            </td>
         </tr>
     {% endfor %}
+    <caption><a href="{{ url_for('home') }}">Home</a></caption>
 </table>
-<a href="{{ url_for('home') }}">Home</a>
 </body>
 </html>
