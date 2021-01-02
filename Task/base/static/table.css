@@ -5,8 +5,8 @@
 }
 
 table {
-    padding-top: 10px;
-    padding-left: 32%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #posts {
@@ -16,7 +16,6 @@ table {
 }
 
 #posts td, #posts th {
-    text-align: center;
     border: 1px solid #ddd;
     padding: 8px;
 }
@@ -30,9 +29,9 @@ table {
 }
 
 #posts th {
+    text-align: center;
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
     background-color: #4CAF50;
     color: white;
 }
