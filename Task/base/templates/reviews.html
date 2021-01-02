@@ -17,13 +17,17 @@
     {% for i in comment %}
         <tr align="center">
             <td>{{ i[0].username }}</td>
-            <td>{{ i[1].userid }}</td>
+            {% for j in name %}
+                {% if i[0].userid != j.userid %}
+                    <td>{{ j.username }}</td>
+                {% endif %}
+            {% endfor %}
             <td>{{ i[1].postitle }}</td>
             <td>{{ i[1].postdescription }}</td>
             <td>{{ i[2].comment }}</td>
         </tr>
     {% endfor %}
+    <caption><a href="{{ url_for('home') }}">Home</a></caption>
 </table>
-<a href="{{ url_for('home') }}">Home</a>
 </body>
 </html>
