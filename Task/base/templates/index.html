@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='index.css') }}">
+</head>
+<body>
+<div id="root">
+    {% with msg = get_flashed_messages() %}
+        {% if msg %}
+            {% for i in msg %}
+                <p style="color: red">{{ i }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div id="inner">
+        <h1>Login Form</h1><br><br>
+        <form method="post" action="/login">
+
+            <input required type="email" class="data" placeholder="Email" name="email"><br><br>
+            <input required type="password" class="data" placeholder="Password" name="password"><br><br>
+            <br>
+
+            <input type="submit">
+        </form>
+        <a href="{{ url_for('register') }}">new here register?</a>
+    </div>
+
+</div>
+</body>
+</html>

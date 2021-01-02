@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>comment a post</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='post.css') }}">
+</head>
+<body>
+<div id="root">
+    <div class="inputcontent">
+        <form method="post" action="{{ url_for('addcomment') }}">
+            <div class="inputdata">
+                <input type="text" hidden name="id" value="{{ id }}">
+
+                <div class="disc">
+                    <textarea placeholder="Description..." name="comment"></textarea>
+                </div>
+
+            </div>
+            <button type="submit" class="add">+</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

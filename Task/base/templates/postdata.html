@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>POST'S</title>
+    <link href="{{ url_for('static',filename='table.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body id="posts">
+<table>
+    <tr align="center">
+        <th>Username</th>
+        <th>PostTitle</th>
+        <th>PostDescription</th>
+        <th>AddComment</th>
+    </tr>
+    {% for i in post %}
+        <tr align="center">
+            <td>{{ i[0].username }}</td>
+            <td>{{ i[1].postitle }}</td>
+            <td>{{ i[1].postdescription }}</td>
+            <td><button><a href="{{ url_for('comment',id=i[1].postid) }}">Review</a></button></td>
+        </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('home') }}">Home</a>
+</body>
+</html>

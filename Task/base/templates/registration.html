@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='reg.css') }}">
+</head>
+<body>
+<div id="root">
+    <div id="inner">
+        <h1>Registration Form</h1><br><br><br><br>
+        <form method="post" action="/register_user" enctype = "multipart/form-data">
+            <input required type="text" class="data" placeholder="User Name" name="username"><br><br>
+            <input required type="email" class="data" placeholder="Email" name="useremail"><br><br>
+            <input required type="password" class="data" placeholder="Password" name="userpassword"><br><br>
+            <label id="label">Gender</label>
+            <input required type="radio" name="usergender" value="male"><label class="gender">Male</label>
+            <input required type="radio" name="usergender" value="female"><label class="gender">Female</label><br><br>
+            <input name="file" type="file" placeholder="Upload profile" class="file"><br><br>
+            <br><br>
+
+            <input type="submit">
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

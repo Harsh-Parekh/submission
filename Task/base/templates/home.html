@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Homepage</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='home.css' ) }}">
+</head>
+<body>
+<div id="root">
+    <div id="inner">
+
+        <a href="{{ url_for('post') }}">Create Post</a><br><br>
+
+        <a href="{{ url_for('seepost') }}">See Posts</a><br><br>
+
+        <a href="{{ url_for('viewcomment') }}">View Comments On Post</a><br><br>
+
+        <a href="{{ url_for('logout') }}">Logout</a>
+
+    </div>
+</div>
+</body>
+</html>
