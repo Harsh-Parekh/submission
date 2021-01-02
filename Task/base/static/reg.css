@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root {
+    height: 100vh;
+    width: 100%;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#inner {
+    background-color: white;
+    width: 500px;
+    height: 700px;
+    box-shadow: 5px 5px 5px 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.data {
+    width: 200px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid black;
+    font-size: 20px;
+    font-weight: bolder
+}
+
+#label {
+
+    font-size: 20px;
+    font-weight: bolder;
+    color: dimgrey;
+}
+
+input[type="submit"] {
+
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: darkgray;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-family: "Bodoni MT";
+    font-size: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: dimgrey;
+    cursor: pointer;
+}
+
+.gender {
+    font-size: 20px;
+    color: dimgrey;
+}
+
+.file {
+    width: 300px;
+    height: 30px;
+    font-size: 20px;
+
+}
