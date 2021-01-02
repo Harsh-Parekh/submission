@@ -50,7 +50,8 @@ def register_user():
     obj_vo.profileimg = filename
     file.save(os.path.join(r"/home/spy/work/Tasksubmission/Task/img", filename))
     obj_dao.registeruser(obj_vo)
-    return render_template('index.html')
+    flash('You have successfully registered')
+    return redirect(url_for('index'))
 
 
 @app.route('/login', methods=["POST"])
