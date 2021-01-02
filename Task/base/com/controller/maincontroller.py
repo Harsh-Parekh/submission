@@ -132,3 +132,4 @@ def viewcomment():
         return render_template('reviews.html', comment=result)
     else:
         return redirect(url_for('home'))
+ 
