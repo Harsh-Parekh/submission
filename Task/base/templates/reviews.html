@@ -9,7 +9,6 @@
 <table>
     <tr align="center">
         <th>Reviewby</th>
-        <th>Reviewto</th>
         <th>Postitle</th>
         <th>Post</th>
         <th>Review</th>
@@ -17,11 +16,6 @@
     {% for i in comment %}
         <tr align="center">
             <td>{{ i[0].username }}</td>
-            {% for j in name %}
-                {% if i[0].userid != j.userid %}
-                    <td>{{ j.username }}</td>
-                {% endif %}
-            {% endfor %}
             <td>{{ i[1].postitle }}</td>
             <td>{{ i[1].postdescription }}</td>
             <td>{{ i[2].comment }}</td>
