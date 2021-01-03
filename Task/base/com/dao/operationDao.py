@@ -5,13 +5,17 @@ from base.com.vo.comment import commentVo
 
 
 class userDao:
+    def get_name(self, data):
+        name = userVo.query.filter_by(useremail=data).all()
+        return name[0].username
+
     def login(self, data):
         email = userVo.query.filter_by(useremail=data.useremail).all()
-        if len(email)!=0:
+        if len(email) != 0:
             password = userVo.query.filter_by(userpassword=data.userpassword).all()
-            if len(password)!=0:
+            if len(password) != 0:
                 ckhlist = userVo.query.filter_by(useremail=data.useremail, userpassword=data.userpassword).all()
-                if len(ckhlist)!=0:
+                if len(ckhlist) != 0:
                     return "valid"
                 else:
                     return "notvalid"
@@ -48,7 +52,7 @@ class commentDao:
         db.session.add(comment)
         db.session.commit()
 
-    def comments(self):
+    def comments(self, name):
         list = db.session.query(userVo, postVo, commentVo) \
             .join((userVo, commentVo.userid == userVo.userid)) \
             .join(postVo, commentVo.postid == postVo.postid) \
