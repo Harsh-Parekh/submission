@@ -15,6 +15,7 @@ def index():
 def logout():
     session['logged_in'] = 'logout'
     session.pop('user')
+    session.pop('name')
     return redirect(url_for('index'))
 
 
@@ -26,7 +27,7 @@ def post():
 @app.route('/render')
 def home():
     if session['logged_in'] == "logged":
-        return render_template('home.html')
+        return render_template('home.html',name=session['name'])
     else:
         return redirect(url_for('index'))
 
@@ -68,6 +69,7 @@ def Login():
     if result == "valid":
         session['logged_in'] = "logged"
         session['user'] = request.form.get('email')
+        session['name'] = obj_dao.get_name(session['user'])
         return redirect(url_for('home'))
     elif result == "notvalid":
         data = "Invalid Username and password...!"
@@ -128,8 +130,7 @@ def addcomment():
 def viewcomment():
     if session['logged_in'] == "logged":
         obj_dao = commentDao()
-        result = obj_dao.comments()
+        result = obj_dao.comments(session['name'])
         return render_template('reviews.html', comment=result)
     else:
         return redirect(url_for('home'))
- 
