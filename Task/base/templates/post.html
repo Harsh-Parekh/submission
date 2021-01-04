@@ -7,6 +7,11 @@
 <body>
 <div id="root">
     <div class="inputcontent">
+        {% for msg in get_flashed_messages() %}
+            {% if msg %}
+                <h2>{{ msg }}</h2>
+            {% endif %}
+        {% endfor %}
         <form method="post" action="{{ url_for('updatepost') }}">
             <div class="inputdata">
 
@@ -20,8 +25,8 @@
             </div>
             <button type="submit" class="add">+</button>
         </form>
+        <a href="{{ url_for('home') }}">Home</a>
     </div>
 </div>
-
 </body>
 </html>
