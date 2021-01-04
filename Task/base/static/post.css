@@ -70,3 +70,17 @@ textarea {
     cursor: pointer;
     background-color: rgb(236, 238, 248);
 }
+
+a:link, a:visited {
+    background-color: white;
+    color: black;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover, a:active {
+    background-color: green;
+    color: white;
+}
