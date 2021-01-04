@@ -27,7 +27,7 @@ def post():
 @app.route('/render')
 def home():
     if session['logged_in'] == "logged":
-        return render_template('home.html',name=session['name'])
+        return render_template('home.html', name=session['name'])
     else:
         return redirect(url_for('index'))
 
@@ -93,11 +93,15 @@ def updatepost():
         obj_dao = postDao()
         obj_vo.postitle = request.form.get('postitle')
         obj_vo.postdescription = request.form.get('postdescription')
-        user = session['user']
-        id = obj_dao.getid(user)
-        obj_vo.userid = id
-        obj_dao.updatepost(obj_vo)
-        return redirect(url_for('home'))
+        if obj_vo.postitle and obj_vo.postdescription is not "":
+            user = session['user']
+            id = obj_dao.getid(user)
+            obj_vo.userid = id
+            obj_dao.updatepost(obj_vo)
+            return redirect(url_for('home'))
+        else:
+            flash("You have to write some title and post first")
+            return redirect(url_for('post'))
     else:
         return redirect(url_for('home'))
 
